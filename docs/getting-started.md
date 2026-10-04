@@ -1,6 +1,6 @@
 # Getting started
 
-DocMD turns a JSON definition plus a folder of Markdown files into a static
+DocRoute turns a JSON definition plus a folder of Markdown files into a static
 documentation site. There is no build step, no bundler and no framework.
 
 ## Install
@@ -8,20 +8,20 @@ documentation site. There is no build step, no bundler and no framework.
 Add the stylesheet and the script to any HTML page:
 
 ```html
-<link rel="stylesheet" href="docmd.css">
-<div id="docmd"></div>
-<script src="docmd.js"></script>
+<link rel="stylesheet" href="docroute.css">
+<div id="docroute"></div>
+<script src="docroute.js"></script>
 <script>
-  docmd.InitDocs("docs.json");
+  docroute.InitDocs("docs.json");
 </script>
 ```
 
-If `docmd.css` is missing, DocMD injects its own copy of the styles, so this
+If `docroute.css` is missing, DocRoute injects its own copy of the styles, so this
 also works:
 
 ```html
-<div id="docmd"></div>
-<script src="docmd.js" data-docmd="docs.json"></script>
+<div id="docroute"></div>
+<script src="docroute.js" data-docroute="docs.json"></script>
 ```
 
 ## How it works

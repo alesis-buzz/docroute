@@ -1,12 +1,15 @@
-# docmd
+# docroute
 
-DocMD is a simple, lightweight documentation system for static sites, built
+DocRoute is a simple, lightweight documentation system for static sites, built
 entirely around Markdown.
 
 - One JSON file defines the navigation.
 - Markdown files are fetched and rendered at runtime.
 - No build step, no framework, no dependencies to install.
-- Sidebar search filters sections, pages and links as you type.
+- Sidebar search filters by title and page content as you type.
+- Keyboard shortcuts: `/` focuses search, `Esc` clears it, `←`/`→` move between pages.
+- GitHub-style callouts (`> [!NOTE]`) rendered as cards.
+- Logo, favicon and footer configurable from JSON.
 - Skeleton loading state while a page is fetched.
 - Syntax highlighting for code fences, loaded on demand.
 - Copy button on every code block.
@@ -16,28 +19,28 @@ entirely around Markdown.
 ## Usage
 
 ```html
-<link rel="stylesheet" href="docmd.css">
-<div id="docmd"></div>
-<script src="docmd.js"></script>
+<link rel="stylesheet" href="docroute.css">
+<div id="docroute"></div>
+<script src="docroute.js"></script>
 <script>
-  docmd.InitDocs("docs.json");
+  docroute.InitDocs("docs.json");
 </script>
 ```
 
 Or let the script initialize itself:
 
 ```html
-<div id="docmd"></div>
-<script src="docmd.js" data-docmd="docs.json"></script>
+<div id="docroute"></div>
+<script src="docroute.js" data-docroute="docs.json"></script>
 ```
 
-`docmd.css` is optional: if it is not found, DocMD injects its styles.
+`docroute.css` is optional: if it is not found, DocRoute injects its styles.
 
 ## Definition
 
 ```json
 {
-  "name": "DocMD",
+  "name": "DocRoute",
   "primary": "#7aa2f7",
   "theme": "dark",
   "base_url": "docs/",
@@ -57,6 +60,10 @@ Or let the script initialize itself:
 | Key | Type | Default | Description |
 | --- | --- | --- | --- |
 | `name` | string | `Documentation` | Brand shown in the sidebar. |
+| `logo` | string | none | Logo image URL. Relative paths resolve against `base_url`. Replaces the initial letter. |
+| `favicon` | string | none | Favicon URL applied at runtime. `icon` is accepted as an alias. |
+| `footer` | string \| object \| `false` | Powered-by link | Sidebar footer. `false` hides it, a string sets custom text, `{ "text", "url" }` sets text plus link. |
+| `footerUrl` | string | none | Link used when `footer` is a string. |
 | `primary` | string | text color | Accent color for links and active items. |
 | `theme` | string | `dark` | `dark` or `light`. The user toggle is remembered. |
 | `base_url` | string | location of the JSON | Directory for relative `md_url` values. |
@@ -66,13 +73,30 @@ Or let the script initialize itself:
 object:
 
 ```js
-docmd.InitDocs("docs.json", { target: "#docmd", primary: "#7aa2f7", theme: "light" });
+docroute.InitDocs("docs.json", { target: "#docroute", primary: "#7aa2f7", theme: "light" });
 ```
 
 Options win over the JSON values. `target` accepts a selector or an element and
-defaults to the element with id `docmd`, then `document.body`. Pass
+defaults to the element with id `docroute`, then `document.body`. Pass
 `highlight: false` to disable code highlighting and `copy: false` to remove the
-copy buttons.
+copy buttons. `logo`, `favicon`, `footer`/`footerUrl`, `searchContent: false`
+and `shortcuts: false` are also supported (same names as `data-*` attributes).
+
+## Search
+
+Search matches titles first. With `searchContent` enabled (default), page
+Markdown is prefetched in the background and indexed, so body matches also
+keep the page visible.
+
+## Shortcuts
+
+`/ ` focuses search, `Esc` clears it, `←`/`→` move between pages (ignored
+while typing). Disable with `{ shortcuts: false }`.
+
+## Callouts
+
+Quotes starting with `> [!NOTE]`, `[!TIP]`, `[!IMPORTANT]`, `[!WARNING]` or
+`[!CAUTION]` render as cards. See `docs/markdown.md` for a live example.
 
 ## Routing
 
@@ -84,12 +108,12 @@ in place. Slug defaults to `name` lowercased and hyphenated.
 
 | Member | Description |
 | --- | --- |
-| `docmd.InitDocs(input, options)` | Mounts the documentation. Returns a Promise. |
-| `docmd.setTheme("dark" \| "light")` | Switches the theme. |
-| `docmd.setPrimary(color)` | Overrides the accent color. |
-| `docmd.go(slug)` | Navigates to a page. |
-| `docmd.getConfig()` | Returns the normalized configuration. |
-| `docmd.version` | Current version. |
+| `docroute.InitDocs(input, options)` | Mounts the documentation. Returns a Promise. |
+| `docroute.setTheme("dark" \| "light")` | Switches the theme. |
+| `docroute.setPrimary(color)` | Overrides the accent color. |
+| `docroute.go(slug)` | Navigates to a page. |
+| `docroute.getConfig()` | Returns the normalized configuration. |
+| `docroute.version` | Current version. |
 
 ## Example
 
@@ -102,8 +126,8 @@ docs/
   getting-started.md
   configuration.md
   markdown.md
-docmd.css
-docmd.js
+docroute.css
+docroute.js
 ```
 
 Serve the folder over HTTP (`npx serve .`) and open `/`. It also deploys to
@@ -113,12 +137,12 @@ GitHub Pages as is, because every path is relative to the root.
 
 Rendered with [marked](https://marked.js.org), loaded from jsDelivr the first
 time a page renders. If you prefer to pin your own copy, include it before
-`docmd.js` and DocMD will use it. Raw HTML in Markdown is allowed, except for
+`docroute.js` and DocRoute will use it. Raw HTML in Markdown is allowed, except for
 script tags and event handler attributes, which are stripped.
 
 Code fences are highlighted with [highlight.js](https://highlightjs.org),
 loaded from jsDelivr only when a page contains code. Include your own copy
-before `docmd.js` to pin a version, or disable highlighting with
+before `docroute.js` to pin a version, or disable highlighting with
 `{ highlight: false }` / `data-highlight="false"`. Token colors adapt to the
 dark and light themes.
 

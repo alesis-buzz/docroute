@@ -1,6 +1,6 @@
 # Markdown
 
-DocMD renders GitHub Flavored Markdown through marked. Everything below is
+DocRoute renders GitHub Flavored Markdown through marked. Everything below is
 plain Markdown.
 
 ## Text
@@ -23,7 +23,7 @@ plain Markdown.
 ## Code
 
 ```js
-docmd.InitDocs("docs.json").then(function (api) {
+docroute.InitDocs("docs.json").then(function (api) {
   console.log(api.version);
 });
 ```
@@ -36,6 +36,23 @@ npx serve .
 
 > Documentation is a love letter that you write to your future self.
 > Keep it short and keep it true.
+
+## Callouts
+
+> [!NOTE]
+> Useful context for the reader.
+
+> [!TIP]
+> Press `/` to focus search and `Esc` to clear it.
+
+> [!IMPORTANT]
+> Keep page slugs stable, they are part of the URL hash.
+
+> [!WARNING]
+> Renaming `md_url` files breaks deep links.
+
+> [!CAUTION]
+> Do not publish secrets in Markdown files.
 
 ## Tables
 
@@ -50,7 +67,7 @@ npx serve .
 
 ## Images
 
-![Placeholder](https://placehold.co/640x200/101013/ececef?text=DocMD)
+![Placeholder](https://placehold.co/640x200/101013/ececef?text=DocRoute)
 
 ## Rules
 
