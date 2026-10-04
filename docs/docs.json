@@ -2,7 +2,6 @@
   "name": "DocRoute",
   "primary": "#c50060",
   "theme": "dark",
-  "base_url": "docs/",
   "sections": [
     {
       "type": "section",
