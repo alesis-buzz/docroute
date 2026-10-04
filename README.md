@@ -133,7 +133,11 @@ docs/
 
 Serve the repo over HTTP (`npx serve .`) and open `/docs/`. To deploy to
 GitHub Pages from `main`, publish the `docs/` folder (Settings → Pages →
-Deploy from branch → `main` + `/docs`), because every path is relative.
+Deploy from branch → `main` + `/docs`). The example loads the library from
+jsDelivr (`cdn.jsdelivr.net/gh/alesis-buzz/docroute@main/`), because Pages only
+publishes `docs/` and a relative `../docroute.js` would escape the site root.
+`raw.githubusercontent.com` does not work here: it serves `text/plain` with
+`nosniff`, which browsers refuse to run as script or stylesheet.
 
 ## Markdown
 
