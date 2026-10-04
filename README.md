@@ -117,21 +117,25 @@ in place. Slug defaults to `name` lowercased and hyphenated.
 
 ## Example
 
-The repository root is a working example:
+`docroute-site/` is a working example:
 
 ```
-index.html
-docs.json
-docs/
-  getting-started.md
-  configuration.md
-  markdown.md
-docroute.css
 docroute.js
+docroute.css
+docroute-site/
+  index.html
+  docs.json
+  CNAME
+  docs/
+    getting-started.md
+    configuration.md
+    markdown.md
 ```
 
-Serve the folder over HTTP (`npx serve .`) and open `/`. It also deploys to
-GitHub Pages as is, because every path is relative to the root.
+Serve the repo over HTTP (`npx serve .`) and open `/docroute-site/`. To deploy
+to GitHub Pages from `main`, publish the `docroute-site/` folder (Settings →
+Pages → Deploy from branch → `main` + `/docroute-site`), because every path is
+relative.
 
 ## Markdown
 
