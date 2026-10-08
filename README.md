@@ -18,6 +18,8 @@ entirely around Markdown.
 
 ## Usage
 
+Vendor `docroute.js` and `docroute.css` into your site:
+
 ```html
 <link rel="stylesheet" href="docroute.css">
 <div id="docroute"></div>
@@ -26,6 +28,20 @@ entirely around Markdown.
   docroute.InitDocs("docs.json");
 </script>
 ```
+
+Or load the same files straight from jsDelivr, no download needed:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/alesis-buzz/docroute@main/docroute.css">
+<div id="docroute"></div>
+<script src="https://cdn.jsdelivr.net/gh/alesis-buzz/docroute@main/docroute.js"></script>
+<script>
+  docroute.InitDocs("docs.json");
+</script>
+```
+
+`@main` tracks the latest commit; pin a tag or a full commit hash for
+production.
 
 Or let the script initialize itself:
 
@@ -90,7 +106,7 @@ keep the page visible.
 
 ## Shortcuts
 
-`/ ` focuses search, `Esc` clears it, `←`/`→` move between pages (ignored
+`/` focuses search, `Esc` clears it, `←`/`→` move between pages (ignored
 while typing). Disable with `{ shortcuts: false }`.
 
 ## Callouts
@@ -154,4 +170,5 @@ dark and light themes.
 
 ## License
 
-MIT
+MIT. UI icons are [Lucide](https://lucide.dev) (ISC, some icons derived from
+Feather under MIT) — see `THIRD_PARTY_LICENSES/LUCIDE.txt`.
