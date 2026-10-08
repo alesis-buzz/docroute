@@ -295,6 +295,12 @@
   background: var(--d-panel-2);
 }
 
+.docroute-icon-btn svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+}
+
 .docroute-menu-btn {
   display: none;
 }
